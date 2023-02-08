@@ -1,15 +1,12 @@
-package task_3;
+package classes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import task_1.Employee;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +14,6 @@ import java.util.List;
 //readString - BufferedReader и FileReader
 //jsonToList - JSONParser, GsonBuilder, Gson
 public class JParser {
-    public static String readString(String path){
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
-            return bufferedReader.lines()
-                    .map(x -> x.replace(" ", ""))
-                    .reduce(String::concat)
-                    .orElse("");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static List<Employee> jsonToList(String json) throws ParseException {
         Gson gson = new GsonBuilder().create();
         JSONParser jsonParser = new JSONParser();
@@ -40,5 +26,12 @@ public class JParser {
             employeeList.add(employee);
         }
         return employeeList;
+    }
+
+    public static String listToJson(List<Employee> employeeList){
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        return gson.toJson(employeeList, new TypeToken<List<Employee>>() {}.getType());
     }
 }

@@ -1,4 +1,4 @@
-package task_1;
+package classes;
 
 public class Employee {
     public long id;
@@ -17,7 +17,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "classes.Employee{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
