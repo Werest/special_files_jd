@@ -1,9 +1,6 @@
 package classes;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class WriteReadFile {
     public static void writeString(String json, String fileName){
@@ -21,8 +18,11 @@ public class WriteReadFile {
                     .map(x -> x.replace(" ", ""))
                     .reduce(String::concat)
                     .orElse("");
+        }catch (FileNotFoundException e){
+            return null;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return null;
     }
 }
